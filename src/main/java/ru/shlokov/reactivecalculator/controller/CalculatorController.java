@@ -33,10 +33,11 @@ public class CalculatorController {
         String secondFunction = request.getSecondFunction();
         long numberOfCalculates = request.getNumberOfCalculates();
         boolean isOrdered = request.isOrdered();
-
+        // если колличество расчётов меньше 1, то вернём сразу ответ.
         if (!paramValidator.isValidParameter(numberOfCalculates)) {
-            return new ResponseEntity<>(Flux.just("please check params in body"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Flux.just("Number of calculates must be more than 0"), HttpStatus.BAD_REQUEST);
         }
+
         boolean isValidFunctions = paramValidator.isValidFunction(firstFunction)
                 && paramValidator.isValidFunction(secondFunction);
 
